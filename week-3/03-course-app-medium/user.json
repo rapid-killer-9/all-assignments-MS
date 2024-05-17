@@ -1,0 +1,10 @@
+[
+  {
+    "username": "raman@gmail.com",
+    "password": "123456",
+    "purchasedCourses": [
+      2,
+      1
+    ]
+  }
+]
