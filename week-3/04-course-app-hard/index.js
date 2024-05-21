@@ -32,8 +32,8 @@ const Admin = mongoose.model('Admin', adminSchema);
 const Course = mongoose.model('Course', courseSchema);
 
 // secret key for jwt
-const adminKey = 'Adm!N@k3y@n0th!Ng';
-const userKey = 'Us3R@k3y@n0th!Ng';
+const adminKey = 'SecretTokenforAdmin';
+const userKey = 'SecretTokenforUser';
 
 const authenticateAdminJwt = (req, res, next) => {
   const authHeader = req.headers.authorization;
@@ -72,7 +72,7 @@ const authenticateUserJwt = (req, res, next) => {
 };
 
 // connect to mongoDb
-mongoose.connect('mongodb+srv://hjha0695:WzVrf5PECPbOPHE2@cluster0.95jmj00.mongodb.net/courses')
+mongoose.connect('mongodb+srv://<username>:<password>@cluster0.95jmj00.mongodb.net/courses')
 
 // Admin routes
 app.post('/admin/signup', async (req, res) => {
