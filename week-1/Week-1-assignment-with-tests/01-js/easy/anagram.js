@@ -8,7 +8,13 @@
 */
 
 function isAnagram(str1, str2) {
-
+  str1 = str1.toUpperCase().split('').sort().join('');
+  str2 = str2.toUpperCase().split('').sort().join('');
+  if(str1 == str2)
+    return true;
+  return false;
 }
 
 module.exports = isAnagram;
+
+// isAnagram('Debit Card', 'Bad Credit');

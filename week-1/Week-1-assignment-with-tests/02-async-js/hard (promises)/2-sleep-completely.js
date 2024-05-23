@@ -3,6 +3,10 @@
  * During this time the thread should not be able to do anything else.
  */
 
-function sleep (seconds) {
-
+function sleep(milliseconds) {
+    const startTime = Date.now();
+    let currentTime = startTime;
+    while (currentTime - startTime < milliseconds) {
+        currentTime = Date.now();
+    }
 }

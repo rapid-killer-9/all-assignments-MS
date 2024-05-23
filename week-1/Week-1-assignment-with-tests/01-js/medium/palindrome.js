@@ -7,7 +7,27 @@
 */
 
 function isPalindrome(str) {
+  var i = 0, j = str.length - 1;
+  while (i <= j) {
+    if (!isAlphabetic(str[i])) {
+      i++;
+      continue;
+    }
+    if (!isAlphabetic(str[j])) {
+      j--;
+      continue;
+    }
+    if (str[i].toLowerCase() != str[j].toLowerCase()) {
+      return false;
+    }
+    i++;
+    j--;
+  }
   return true;
+}
+
+function isAlphabetic(char) {
+  return /[a-zA-Z]/.test(char);
 }
 
 module.exports = isPalindrome;
