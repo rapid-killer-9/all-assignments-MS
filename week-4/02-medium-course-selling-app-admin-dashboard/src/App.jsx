@@ -1,9 +1,9 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Login from './components/Login';
-import Landing from "./components/Landing";
-import CreateCourse from './components/CreateCourse';
-import Register from './components/Register';
-import ShowCourses from './components/ShowCourses';
+import Landing from "./Components/landing"
+import Signup from "./Components/signup"
+import Signin from "./Components/signin"
+import Appbar from "./Components/appbar";
+import AddCourse from "./Components/addcourse"
 
 // This file shows how you can do routing in React.
 // Try going to /login, /register, /about, /courses on the website and see how the html changes
@@ -11,15 +11,17 @@ import ShowCourses from './components/ShowCourses';
 // You can also try going to /random and see what happens (a route that doesnt exist)
 function App() {
     return (
-        <Router>
-            <Routes>
-                <Route path="/" element={<Landing />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/register" element={<Register />} />
-                <Route path="/about" element={<CreateCourse />} />
-                <Route path="/courses" element={<ShowCourses />} />
-            </Routes>
-        </Router>
+        <div style={{width: "100vw", height: "100vh", background: "#eeeeee"}}>
+            <Router>
+                <Appbar />
+                <Routes>
+                    <Route path="/" element={<Landing />} />
+                    <Route path='/addcourse' element={<AddCourse />}/>
+                    <Route path="/signup" element={<Signup />} />
+                    <Route path="/signin" element={<Signin />} />
+                </Routes>
+            </Router>
+        </div>
     );
 }
 
