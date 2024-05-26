@@ -1,9 +1,10 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Landing from "./Components/landing"
-import Signup from "./Components/signup"
-import Signin from "./Components/signin"
-import Appbar from "./Components/appbar";
-import AddCourse from "./Components/addcourse"
+import Landing from "./Components/admin/landing"
+import Signup from "./Components/admin/signup"
+import Signin from "./Components/admin/signin"
+import Appbar from "./Components/admin/appbar";
+import AddCourse from "./Components/admin/addcourse"
+import Dashboard from './Components/admin/dashboard';
 
 // This file shows how you can do routing in React.
 // Try going to /login, /register, /about, /courses on the website and see how the html changes
@@ -15,6 +16,7 @@ function App() {
             <Router>
                 <Appbar />
                 <Routes>
+                    <Route path='/dashboard' element={<Dashboard/>}/>
                     <Route path="/" element={<Landing />} />
                     <Route path='/addcourse' element={<AddCourse />}/>
                     <Route path="/signup" element={<Signup />} />

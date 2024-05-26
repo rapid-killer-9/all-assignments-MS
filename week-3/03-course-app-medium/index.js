@@ -80,6 +80,12 @@ const authenticateUserJwt = (req, res, next) => {
 };
 
 // Admin routes
+app.get('/admin/me' ,authenticateAdminJwt, (req, res) => {
+  res.json({
+    username: req.user.username
+  })
+})
+
 app.post('/admin/signup', (req, res) => {
   const admin = req.body;
   const existingAdmin = ADMINS.find(a => a.username === admin.username);
@@ -142,6 +148,12 @@ app.get('/admin/courses', authenticateAdminJwt, (req, res) => {
 });
 
 // User routes
+app.get('/users/me' ,authenticateUserJwt, (req, res) => {
+  res.json({
+    username: req.user.username
+  })
+})
+
 app.post('/users/signup', (req, res) => {
   const user = req.body;
   const existingUser = USERS.find(u => u.username === user.username);

@@ -1,11 +1,30 @@
 import { Card, Typography, Button, TextField, Box } from "@mui/material";
-import {useState} from "react";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-function Signup() {
+function Signin() {
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
+  const navigate = useNavigate();
 
-    const [email, setEmail] = useState();
-    const [password, setPassword] = useState();
-
+  const handleSignIn = () => {
+    fetch("http://localhost:3000/admin/login", {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+        username: email,
+        password: password,
+      },
+    })
+      .then((resp) => {
+        return resp.json();
+      })
+      .then((data) => {
+        localStorage.setItem("token", data.token);
+        navigate("/dashboard");
+      });
+  };
+  
   return (
     <Box
       sx={{
@@ -16,7 +35,7 @@ function Signup() {
       }}
     >
       <Typography variant="h6" gutterBottom>
-        Welcome to Coursera. Sign Up below
+        Welcome Back. Sign in below
       </Typography>
       <Card
         variant="outlined"
@@ -48,32 +67,17 @@ function Signup() {
           margin="normal"
           fullWidth
         />
-        <Button 
-            variant="contained" 
-            size="small" 
-            sx={{ mt: 2 }}
-            onClick={() => {
-                fetch("http://localhost:3000/admin/signup", {
-                    method: "POST",
-                    body: JSON.stringify({
-                        username: email,
-                        password: password
-                    }),
-                    headers: {
-                        "Content-type": "application/json"
-                    }
-                }).then((resp) => {
-                    return resp.json();
-                }).then((data) => {
-                    localStorage.setItem("token", data.token);
-                });
-            }}
+        <Button
+          variant="contained"
+          size="small"
+          sx={{ mt: 2 }}
+          onClick={handleSignIn}
         >
-          Sign up
+          Sign in
         </Button>
       </Card>
     </Box>
   );
 }
 
-export default Signup;
+export default Signin;

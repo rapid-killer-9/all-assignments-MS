@@ -1,10 +1,31 @@
 import { Card, Typography, Button, TextField, Box } from "@mui/material";
-import {useState} from "react";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-function Signin() {
-
+function Signup() {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+  const navigate = useNavigate();
+  const handleSignUp = () => {
+    fetch("http://localhost:3000/admin/signup", {
+      method: "POST",
+      body: JSON.stringify({
+        username: email,
+        password: password,
+      }),
+      headers: {
+        "Content-type": "application/json",
+      },
+    })
+      .then((resp) => {
+        return resp.json();
+      })
+      .then((data) => {
+        localStorage.setItem("token", data.token);
+        navigate("/dashboard");
+      });
+  };
+
   return (
     <Box
       sx={{
@@ -15,7 +36,7 @@ function Signin() {
       }}
     >
       <Typography variant="h6" gutterBottom>
-        Welcome Back. Sign in below
+        Welcome to Coursera. Sign Up below
       </Typography>
       <Card
         variant="outlined"
@@ -47,30 +68,17 @@ function Signin() {
           margin="normal"
           fullWidth
         />
-        <Button 
-          variant="contained"  
-          size="small" 
+        <Button
+          variant="contained"
+          size="small"
           sx={{ mt: 2 }}
-          onClick={() => {
-            fetch("http://localhost:3000/admin/login", {
-                    method: "POST",
-                    headers: {
-                        "Content-type": "application/json",
-                        "username": email,
-                        "password": password
-                    }
-                }).then((resp) => {
-                    return resp.json();
-                }).then((data) => {
-                    localStorage.setItem("token", data.token);
-                });
-          }}
+          onClick={handleSignUp}
         >
-          Sign in
+          Sign up
         </Button>
       </Card>
     </Box>
   );
 }
 
-export default Signin;
+export default Signup;

@@ -16,8 +16,7 @@ router.post('/', authenticateJwt, async (req, res) => {
       const newTodo = new Todo({
         user: id,
         title,
-        description,
-        completed: false
+        description
       });
       const todo = await newTodo.save();
       user.todo.push(todo._id);
